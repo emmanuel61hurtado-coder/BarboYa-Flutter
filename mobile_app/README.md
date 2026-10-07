@@ -1,17 +1,31 @@
-# mobile_app
+# BarboYa Mobile App (Flutter)
 
-A new Flutter project.
+Aplicación móvil y multiplataforma de BarboYa construida con Flutter y Dart, integrada con el backend FastAPI.
 
-## Getting Started
+## 🚀 Requisitos
+- Flutter SDK (versión 3.47.6 o superior)
+- Dart SDK (versión 3.13.5 o superior)
 
-This project is a starting point for a Flutter application.
+## 📦 Instalación y Ejecución
 
-A few resources to get you started if this is your first Flutter project:
+1. Clona el repositorio y navega a la carpeta de la aplicación móvil:
+   ```bash
+   cd mobile_app
+   ```
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+2. Instala las dependencias:
+   ```bash
+   flutter pub get
+   ```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. Ejecuta la aplicación (web, emulador o escritorio):
+   ```bash
+   flutter run -d chrome
+   ```
+
+## 🏗 Arquitectura
+- **Clean Architecture Modular** basada en funcionalidades (`auth`, `home`, `commerces`, `cart`, `orders`, `delivery`, `merchant`, `admin`, `profile`).
+- **Estado**: Flutter Riverpod.
+- **Ruteo**: GoRouter.
+- **Red**: Dio con interceptores y manejo robusto de errores de API.
+- **Seguridad**: Flutter Secure Storage para tokens y credenciales.

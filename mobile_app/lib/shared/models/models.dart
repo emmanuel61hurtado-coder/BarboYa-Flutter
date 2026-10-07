@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'models.g.dart';
-
-@JsonSerializable()
 class UserRead {
   final String id;
   final String email;
@@ -22,11 +17,29 @@ class UserRead {
     required this.aprobado,
   });
 
-  factory UserRead.fromJson(Map<String, dynamic> json) => _$UserReadFromJson(json);
-  Map<String, dynamic> toJson() => _$UserReadToJson(this);
+  factory UserRead.fromJson(Map<String, dynamic> json) {
+    return UserRead(
+      id: json['id']?.toString() ?? '',
+      email: json['email']?.toString() ?? '',
+      nombre: json['nombre']?.toString() ?? '',
+      telefono: json['telefono']?.toString(),
+      rol: json['rol']?.toString() ?? 'CLIENTE',
+      activo: json['activo'] ?? true,
+      aprobado: json['aprobado'] ?? true,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'email': email,
+        'nombre': nombre,
+        'telefono': telefono,
+        'rol': rol,
+        'activo': activo,
+        'aprobado': aprobado,
+      };
 }
 
-@JsonSerializable()
 class CategoriaRead {
   final String id;
   final String nombre;
@@ -40,11 +53,23 @@ class CategoriaRead {
     this.icono,
   });
 
-  factory CategoriaRead.fromJson(Map<String, dynamic> json) => _$CategoriaReadFromJson(json);
-  Map<String, dynamic> toJson() => _$CategoriaReadToJson(this);
+  factory CategoriaRead.fromJson(Map<String, dynamic> json) {
+    return CategoriaRead(
+      id: json['id']?.toString() ?? '',
+      nombre: json['nombre']?.toString() ?? '',
+      descripcion: json['descripcion']?.toString(),
+      icono: json['icono']?.toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nombre': nombre,
+        'descripcion': descripcion,
+        'icono': icono,
+      };
 }
 
-@JsonSerializable()
 class ProductoRead {
   final String id;
   final String nombre;
@@ -66,11 +91,31 @@ class ProductoRead {
     this.imagenUrl,
   });
 
-  factory ProductoRead.fromJson(Map<String, dynamic> json) => _$ProductoReadFromJson(json);
-  Map<String, dynamic> toJson() => _$ProductoReadToJson(this);
+  factory ProductoRead.fromJson(Map<String, dynamic> json) {
+    return ProductoRead(
+      id: json['id']?.toString() ?? '',
+      nombre: json['nombre']?.toString() ?? '',
+      descripcion: json['descripcion']?.toString(),
+      precio: (json['precio'] as num?)?.toDouble() ?? 0.0,
+      disponible: json['disponible'] ?? true,
+      comercioId: json['comercio_id']?.toString() ?? '',
+      categoriaId: json['categoria_id']?.toString(),
+      imagenUrl: json['imagen_url']?.toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nombre': nombre,
+        'descripcion': descripcion,
+        'precio': precio,
+        'disponible': disponible,
+        'comercio_id': comercioId,
+        'categoria_id': categoriaId,
+        'imagen_url': imagenUrl,
+      };
 }
 
-@JsonSerializable()
 class ComercioRead {
   final String id;
   final String nombre;
@@ -80,7 +125,6 @@ class ComercioRead {
   final String? categoriaId;
   final bool abierto;
   final String? imagenUrl;
-  @JsonKey(defaultValue: [])
   final List<ProductoRead> productos;
 
   ComercioRead({
@@ -95,11 +139,36 @@ class ComercioRead {
     required this.productos,
   });
 
-  factory ComercioRead.fromJson(Map<String, dynamic> json) => _$ComercioReadFromJson(json);
-  Map<String, dynamic> toJson() => _$ComercioReadToJson(this);
+  factory ComercioRead.fromJson(Map<String, dynamic> json) {
+    var prodsList = json['productos'] as List? ?? [];
+    List<ProductoRead> prods = prodsList.map((e) => ProductoRead.fromJson(e)).toList();
+
+    return ComercioRead(
+      id: json['id']?.toString() ?? '',
+      nombre: json['nombre']?.toString() ?? '',
+      descripcion: json['descripcion']?.toString(),
+      direccion: json['direccion']?.toString() ?? '',
+      telefono: json['telefono']?.toString(),
+      categoriaId: json['categoria_id']?.toString(),
+      abierto: json['abierto'] ?? true,
+      imagenUrl: json['imagen_url']?.toString(),
+      productos: prods,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'nombre': nombre,
+        'descripcion': descripcion,
+        'direccion': direccion,
+        'telefono': telefono,
+        'categoria_id': categoriaId,
+        'abierto': abierto,
+        'imagen_url': imagenUrl,
+        'productos': productos.map((e) => e.toJson()).toList(),
+      };
 }
 
-@JsonSerializable()
 class DireccionRead {
   final String id;
   final String clienteId;
@@ -119,11 +188,29 @@ class DireccionRead {
     this.referencias,
   });
 
-  factory DireccionRead.fromJson(Map<String, dynamic> json) => _$DireccionReadFromJson(json);
-  Map<String, dynamic> toJson() => _$DireccionReadToJson(this);
+  factory DireccionRead.fromJson(Map<String, dynamic> json) {
+    return DireccionRead(
+      id: json['id']?.toString() ?? '',
+      clienteId: json['cliente_id']?.toString() ?? '',
+      alias: json['alias']?.toString() ?? '',
+      direccion: json['direccion']?.toString() ?? '',
+      latitud: (json['latitud'] as num?)?.toDouble(),
+      longitud: (json['longitud'] as num?)?.toDouble(),
+      referencias: json['referencias']?.toString(),
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'cliente_id': clienteId,
+        'alias': alias,
+        'direccion': direccion,
+        'latitud': latitud,
+        'longitud': longitud,
+        'referencias': referencias,
+      };
 }
 
-@JsonSerializable()
 class DetallePedidoRead {
   final String id;
   final String pedidoId;
@@ -143,11 +230,29 @@ class DetallePedidoRead {
     this.producto,
   });
 
-  factory DetallePedidoRead.fromJson(Map<String, dynamic> json) => _$DetallePedidoReadFromJson(json);
-  Map<String, dynamic> toJson() => _$DetallePedidoReadToJson(this);
+  factory DetallePedidoRead.fromJson(Map<String, dynamic> json) {
+    return DetallePedidoRead(
+      id: json['id']?.toString() ?? '',
+      pedidoId: json['pedido_id']?.toString() ?? '',
+      productoId: json['producto_id']?.toString() ?? '',
+      cantidad: (json['cantidad'] as num?)?.toInt() ?? 1,
+      precioUnitario: (json['precio_unitario'] as num?)?.toDouble() ?? 0.0,
+      subtotal: (json['subtotal'] as num?)?.toDouble() ?? 0.0,
+      producto: json['producto'] != null ? ProductoRead.fromJson(json['producto']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'pedido_id': pedidoId,
+        'producto_id': productoId,
+        'cantidad': cantidad,
+        'precio_unitario': precioUnitario,
+        'subtotal': subtotal,
+        'producto': producto?.toJson(),
+      };
 }
 
-@JsonSerializable()
 class PedidoRead {
   final String id;
   final String clienteId;
@@ -161,7 +266,6 @@ class PedidoRead {
   final String metodoPago;
   final String? cuponCodigo;
   final String fechaCreacion;
-  @JsonKey(defaultValue: [])
   final List<DetallePedidoRead> detalles;
   final ComercioRead? comercio;
   final DireccionRead? direccion;
@@ -184,11 +288,48 @@ class PedidoRead {
     this.direccion,
   });
 
-  factory PedidoRead.fromJson(Map<String, dynamic> json) => _$PedidoReadFromJson(json);
-  Map<String, dynamic> toJson() => _$PedidoReadToJson(this);
+  factory PedidoRead.fromJson(Map<String, dynamic> json) {
+    var detList = json['detalles'] as List? ?? [];
+    List<DetallePedidoRead> detalles = detList.map((e) => DetallePedidoRead.fromJson(e)).toList();
+
+    return PedidoRead(
+      id: json['id']?.toString() ?? '',
+      clienteId: json['cliente_id']?.toString() ?? '',
+      comercioId: json['comercio_id']?.toString() ?? '',
+      repartidorId: json['repartidor_id']?.toString(),
+      direccionId: json['direccion_id']?.toString() ?? '',
+      estado: json['estado']?.toString() ?? 'CREADO',
+      subtotal: (json['subtotal'] as num?)?.toDouble() ?? 0.0,
+      costoEnvio: (json['costo_envio'] as num?)?.toDouble() ?? 0.0,
+      total: (json['total'] as num?)?.toDouble() ?? 0.0,
+      metodoPago: json['metodo_pago']?.toString() ?? 'TARJETA',
+      cuponCodigo: json['cupon_codigo']?.toString(),
+      fechaCreacion: json['fecha_creacion']?.toString() ?? '',
+      detalles: detalles,
+      comercio: json['comercio'] != null ? ComercioRead.fromJson(json['comercio']) : null,
+      direccion: json['direccion'] != null ? DireccionRead.fromJson(json['direccion']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'cliente_id': clienteId,
+        'comercio_id': comercioId,
+        'repartidor_id': repartidorId,
+        'direccion_id': direccionId,
+        'estado': estado,
+        'subtotal': subtotal,
+        'costo_envio': costoEnvio,
+        'total': total,
+        'metodo_pago': metodoPago,
+        'cupon_codigo': cuponCodigo,
+        'fecha_creacion': fechaCreacion,
+        'detalles': detalles.map((e) => e.toJson()).toList(),
+        'comercio': comercio?.toJson(),
+        'direccion': direccion?.toJson(),
+      };
 }
 
-@JsonSerializable()
 class EntregaRead {
   final String id;
   final String pedidoId;
@@ -208,6 +349,25 @@ class EntregaRead {
     this.pedido,
   });
 
-  factory EntregaRead.fromJson(Map<String, dynamic> json) => _$EntregaReadFromJson(json);
-  Map<String, dynamic> toJson() => _$EntregaReadToJson(this);
+  factory EntregaRead.fromJson(Map<String, dynamic> json) {
+    return EntregaRead(
+      id: json['id']?.toString() ?? '',
+      pedidoId: json['pedido_id']?.toString() ?? '',
+      repartidorId: json['repartidor_id']?.toString(),
+      estado: json['estado']?.toString() ?? 'PENDIENTE',
+      latitudActual: (json['latitud_actual'] as num?)?.toDouble(),
+      longitudActual: (json['longitud_actual'] as num?)?.toDouble(),
+      pedido: json['pedido'] != null ? PedidoRead.fromJson(json['pedido']) : null,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'pedido_id': pedidoId,
+        'repartidor_id': repartidorId,
+        'estado': estado,
+        'latitud_actual': latitudActual,
+        'longitud_actual': longitudActual,
+        'pedido': pedido?.toJson(),
+      };
 }
