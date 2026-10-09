@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_app/core/theme/app_theme.dart';
 import 'package:mobile_app/features/cart/presentation/cart_screen.dart';
 import 'package:mobile_app/shared/models/models.dart';
+import 'package:mobile_app/shared/providers/app_providers.dart';
 
 final ordersProvider = FutureProvider<List<PedidoRead>>((ref) async {
   return await ref.read(pedidoServiceProvider).getPedidos();
@@ -24,7 +25,9 @@ class OrdersHistoryScreen extends ConsumerWidget {
       body: RefreshIndicator(
         color: AppTheme.darkCharcoal,
         backgroundColor: AppTheme.primaryLime,
-        onRefresh: () async => ref.refresh(ordersProvider),
+        onRefresh: () async {
+          ref.invalidate(ordersProvider);
+        },
         child: ordersAsync.when(
           data: (orders) {
             if (orders.isEmpty) {
