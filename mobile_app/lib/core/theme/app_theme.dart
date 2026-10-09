@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const Color primaryOrange = Color(0xFFFF6B00);
-  static const Color secondaryDark = Color(0xFF1E1E24);
-  static const Color backgroundLight = Color(0xFFF8F9FA);
+  // BarboYa New Art Direction: Electric Lime & Sophisticated Dark Charcoal
+  static const Color primaryLime = Color(0xFFC6F600);
+  static const Color primaryLimeDark = Color(0xFFA3D000);
+  static const Color darkCharcoal = Color(0xFF151914);
+  static const Color surfaceDark = Color(0xFF1E231D);
+  static const Color backgroundLight = Color(0xFFF4F6F0);
   static const Color surfaceLight = Colors.white;
-  static const Color errorRed = Color(0xFFD32F2F);
+  static const Color errorRed = Color(0xFFE53935);
+  static const Color successGreen = Color(0xFF2E7D32);
 
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: primaryOrange,
-        primary: primaryOrange,
-        secondary: secondaryDark,
+        seedColor: primaryLime,
+        primary: primaryLime,
+        onPrimary: darkCharcoal,
+        secondary: darkCharcoal,
         surface: surfaceLight,
         error: errorRed,
         brightness: Brightness.light,
@@ -21,51 +26,59 @@ class AppTheme {
       scaffoldBackgroundColor: backgroundLight,
       appBarTheme: const AppBarTheme(
         backgroundColor: surfaceLight,
-        foregroundColor: secondaryDark,
+        foregroundColor: darkCharcoal,
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          color: secondaryDark,
+          color: darkCharcoal,
           fontSize: 18,
           fontWeight: FontWeight.bold,
+          letterSpacing: 0.5,
         ),
       ),
       cardTheme: CardThemeData(
         color: surfaceLight,
-        elevation: 2,
+        elevation: 1,
+        shadowColor: Colors.black.withOpacity(0.08),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryOrange,
-          foregroundColor: Colors.white,
-          minimumSize: const Size(double.infinity, 50),
+          backgroundColor: primaryLime,
+          foregroundColor: darkCharcoal,
+          minimumSize: const Size(double.infinity, 54),
+          elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(14),
           ),
           textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
+            letterSpacing: 0.5,
           ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: primaryOrange, width: 2),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(color: darkCharcoal, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(color: errorRed, width: 1),
         ),
       ),
     );
