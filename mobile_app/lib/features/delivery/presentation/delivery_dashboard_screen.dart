@@ -6,7 +6,6 @@ import 'package:mobile_app/core/security/secure_storage.dart';
 import 'package:mobile_app/core/theme/app_theme.dart';
 import 'package:mobile_app/shared/models/models.dart';
 import 'package:mobile_app/shared/services/entrega_service.dart';
-import 'package:mobile_app/shared/services/pedido_service.dart';
 
 final availableDeliveriesProvider = FutureProvider<List<PedidoRead>>((ref) async {
   final service = EntregaService(DioClient());
@@ -18,15 +17,10 @@ class DeliveryDashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
     final deliveriesAsync = ref.watch(availableDeliveriesProvider);
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Panel de Repartidor'),
         actions: [
@@ -40,19 +34,23 @@ class DeliveryDashboardScreen extends ConsumerWidget {
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () async => ref.refresh(availableDeliveriesProvider),
+        color: AppTheme.darkCharcoal,
+        backgroundColor: AppTheme.primaryLime,
+        onRefresh: () async {
+          ref.refresh(availableDeliveriesProvider);
+        },
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: secondaryDark,
-                borderRadius: BorderRadius.circular(16),
+                color: AppTheme.darkCharcoal,
+                borderRadius: BorderRadius.circular(20),
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.delivery_dining, color: primaryOrange, size: 40),
+                  Icon(Icons.delivery_dining, color: AppTheme.primaryLime, size: 40),
                   SizedBox(width: 16),
                   Expanded(
                     child: Column(
@@ -98,10 +96,10 @@ class DeliveryDashboardScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment:                               MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('Pedido #${order.id.substring(0, 8)}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                                Text('\$${order.total.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.primaryOrange)),
+                                Text('\$${order.total.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.darkCharcoal)),
                               ],
                             ),
                             const Divider(height: 16),
