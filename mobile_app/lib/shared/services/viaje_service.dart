@@ -28,7 +28,7 @@ class ViajeService {
         'destino_lat': destinoLat,
         'destino_lng': destinoLng,
         'precio_estimado': precioEstimado,
-        if (precioPropuesto != null) 'precio_propuesto': precioPropuesto,
+        'precio_propuesto': ?precioPropuesto,
       },
     );
     return ViajeResponse.fromJson(response.data);

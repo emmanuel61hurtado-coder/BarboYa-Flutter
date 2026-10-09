@@ -26,7 +26,7 @@ class EnvioService {
       data: {
         'tipo_paquete': tipoPaquete,
         'descripcion': descripcion,
-        if (pesoKg != null) 'peso_kg': pesoKg,
+        'peso_kg': ?pesoKg,
         'origen_direccion': origenDireccion,
         'origen_lat': origenLat,
         'origen_lng': origenLng,
@@ -35,7 +35,7 @@ class EnvioService {
         'destino_lng': destinoLng,
         'nombre_destinatario': nombreDestinatario,
         'telefono_destinatario': telefonoDestinatario,
-        if (instrucciones != null) 'instrucciones': instrucciones,
+        'instrucciones': ?instrucciones,
         'costo': costo,
       },
     );
