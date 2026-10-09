@@ -72,6 +72,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.backgroundLight,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -82,52 +83,59 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Icon(
-                    Icons.fastfood,
-                    size: 64,
-                    color: AppTheme.primaryOrange,
+                  Container(
+                    width: 72,
+                    height: 72,
+                    decoration: BoxDecoration(
+                      color: AppTheme.darkCharcoal,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Icon(
+                      Icons.bolt,
+                      size: 40,
+                      color: AppTheme.primaryLime,
+                    ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                   const Text(
-                    '¡Bienvenido a BarboYa!',
-                    textAlign: TextAlign.center,
+                    'Hola de nuevo',
                     style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.secondaryDark,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                      color: AppTheme.darkCharcoal,
+                      letterSpacing: -0.5,
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Inicia sesión para pedir tus platos favoritos',
-                    textAlign: TextAlign.center,
+                    'Inicia sesión para continuar en BarboYa',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 15,
                       color: Colors.grey,
                     ),
                   ),
                   const SizedBox(height: 32),
                   if (_errorMessage != null) ...[
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
                         color: Colors.red.shade50,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(14),
                         border: Border.all(color: Colors.red.shade200),
                       ),
                       child: Text(
                         _errorMessage!,
-                        style: TextStyle(color: Colors.red.shade800),
+                        style: TextStyle(color: Colors.red.shade800, fontWeight: FontWeight.w500),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
                   ],
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       labelText: 'Correo electrónico',
-                      prefixIcon: Icon(Icons.email_outlined),
+                      prefixIcon: Icon(Icons.email_outlined, color: AppTheme.darkCharcoal),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty || !value.contains('@')) {
@@ -142,16 +150,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Contraseña',
-                      prefixIcon: Icon(Icons.lock_outline),
+                      prefixIcon: Icon(Icons.lock_outline, color: AppTheme.darkCharcoal),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 6) {
-                        return 'La contraseña debe tener al menos 6 caracteres';
+                        return 'Mínimo 6 caracteres';
                       }
                       return null;
                     },
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 28),
                   ElevatedButton(
                     onPressed: _isLoading ? null : _login,
                     child: _isLoading
@@ -159,22 +167,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             width: 24,
                             height: 24,
                             child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              strokeWidth: 2.5,
+                              valueColor: AlwaysStoppedAnimation<Color>(AppTheme.darkCharcoal),
                             ),
                           )
                         : const Text('Iniciar Sesión'),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('¿No tienes cuenta? '),
+                      const Text(
+                        '¿No tienes cuenta? ',
+                        style: TextStyle(color: Colors.grey),
+                      ),
                       TextButton(
                         onPressed: () => context.push('/register'),
                         child: const Text(
                           'Regístrate aquí',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.darkCharcoal,
+                          ),
                         ),
                       ),
                     ],

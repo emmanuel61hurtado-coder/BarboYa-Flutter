@@ -70,6 +70,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Crear Cuenta'),
       ),
@@ -83,24 +84,21 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
               children: [
                 if (_errorMessage != null) ...[
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: Colors.red.shade50,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(14),
                       border: Border.all(color: Colors.red.shade200),
                     ),
-                    child: Text(
-                      _errorMessage!,
-                      style: TextStyle(color: Colors.red.shade800),
-                    ),
+                    child: Text(_errorMessage!, style: TextStyle(color: Colors.red.shade800)),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                 ],
                 TextFormField(
                   controller: _nameController,
                   decoration: const InputDecoration(
                     labelText: 'Nombre completo',
-                    prefixIcon: Icon(Icons.person_outline),
+                    prefixIcon: Icon(Icons.person_outline, color: AppTheme.darkCharcoal),
                   ),
                   validator: (value) =>
                       value == null || value.isEmpty ? 'Ingresa tu nombre' : null,
@@ -111,7 +109,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     labelText: 'Correo electrónico',
-                    prefixIcon: Icon(Icons.email_outlined),
+                    prefixIcon: Icon(Icons.email_outlined, color: AppTheme.darkCharcoal),
                   ),
                   validator: (value) =>
                       value == null || !value.contains('@') ? 'Correo inválido' : null,
@@ -122,7 +120,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   keyboardType: TextInputType.phone,
                   decoration: const InputDecoration(
                     labelText: 'Teléfono',
-                    prefixIcon: Icon(Icons.phone_outlined),
+                    prefixIcon: Icon(Icons.phone_outlined, color: AppTheme.darkCharcoal),
                   ),
                   validator: (value) =>
                       value == null || value.isEmpty ? 'Ingresa tu teléfono' : null,
@@ -133,7 +131,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Contraseña (mín. 6 caracteres)',
-                    prefixIcon: Icon(Icons.lock_outline),
+                    prefixIcon: Icon(Icons.lock_outline, color: AppTheme.darkCharcoal),
                   ),
                   validator: (value) =>
                       value == null || value.length < 6 ? 'Mínimo 6 caracteres' : null,
@@ -143,7 +141,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   value: _selectedRole,
                   decoration: const InputDecoration(
                     labelText: 'Tipo de cuenta',
-                    prefixIcon: Icon(Icons.badge_outlined),
+                    prefixIcon: Icon(Icons.badge_outlined, color: AppTheme.darkCharcoal),
                   ),
                   items: const [
                     DropdownMenuItem(value: 'CLIENTE', child: Text('Cliente')),
@@ -158,7 +156,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     }
                   },
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
                 ElevatedButton(
                   onPressed: _isLoading ? null : _register,
                   child: _isLoading
@@ -166,8 +164,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           width: 24,
                           height: 24,
                           child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            strokeWidth: 2.5,
+                            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.darkCharcoal),
                           ),
                         )
                       : const Text('Registrarse'),

@@ -20,20 +20,16 @@ class CustomerHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color primaryOrange = Color(0xFFFF6B00);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
     final comerciosAsync = ref.watch(comerciosProvider);
     final cartState = ref.watch(cartProvider);
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('BarboYa'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.receipt_long),
+            icon: const Icon(Icons.receipt_long_outlined),
             onPressed: () => context.push('/orders'),
             tooltip: 'Mis Pedidos',
           ),
@@ -45,6 +41,8 @@ class CustomerHomeScreen extends ConsumerWidget {
         ],
       ),
       body: RefreshIndicator(
+        color: AppTheme.darkCharcoal,
+        backgroundColor: AppTheme.primaryLime,
         onRefresh: () async {
           return ref.refresh(comerciosProvider);
         },
@@ -53,23 +51,38 @@ class CustomerHomeScreen extends ConsumerWidget {
           children: [
             // Delivery Address Header Card
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: secondaryDark,
-                borderRadius: BorderRadius.circular(16),
+                color: AppTheme.darkCharcoal,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.location_on, color: primaryOrange, size: 28),
-                  const SizedBox(width: 12),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: AppTheme.primaryLime,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.location_on, color: AppTheme.darkCharcoal, size: 24),
+                  ),
+                  const SizedBox(width: 16),
                   const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Entrega en:',
+                          'Entrega actual en:',
                           style: TextStyle(color: Colors.white70, fontSize: 12),
                         ),
+                        SizedBox(height: 2),
                         Text(
                           'Calle Principal #45-20',
                           style: TextStyle(
@@ -83,7 +96,7 @@ class CustomerHomeScreen extends ConsumerWidget {
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: const Text('Cambiar', style: TextStyle(color: primaryOrange)),
+                    child: const Text('Cambiar', style: TextStyle(color: AppTheme.primaryLime, fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),
@@ -108,7 +121,7 @@ class CustomerHomeScreen extends ConsumerWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: secondaryDark,
+                color: AppTheme.darkCharcoal,
               ),
             ),
             const SizedBox(height: 16),
@@ -137,15 +150,17 @@ class CustomerHomeScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              height: 140,
+                              height: 150,
                               width: double.infinity,
-                              color: Colors.orange.shade100,
-                              child: const Icon(Icons.store, size: 64, color: AppTheme.primaryOrange),
+                              color: AppTheme.darkCharcoal.withOpacity(0.05),
+                              child: Center(
+                                child: Icon(Icons.storefront, size: 64, color: AppTheme.darkCharcoal.withOpacity(0.3)),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(16),
                               child: Row(
-                                mainAxisAlignment:                                 MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
                                     child: Column(
@@ -156,6 +171,7 @@ class CustomerHomeScreen extends ConsumerWidget {
                                           style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
+                                            color: AppTheme.darkCharcoal,
                                           ),
                                         ),
                                         const SizedBox(height: 4),
@@ -169,10 +185,10 @@ class CustomerHomeScreen extends ConsumerWidget {
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                                     decoration: BoxDecoration(
                                       color: comercio.abierto ? Colors.green.shade50 : Colors.red.shade50,
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: Text(
                                       comercio.abierto ? 'Abierto' : 'Cerrado',

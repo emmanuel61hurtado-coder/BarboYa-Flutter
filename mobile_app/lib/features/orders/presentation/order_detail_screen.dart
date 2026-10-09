@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile_app/core/theme/app_theme.dart';
 import 'package:mobile_app/features/cart/presentation/cart_screen.dart';
 import 'package:mobile_app/shared/models/models.dart';
 
@@ -14,25 +15,10 @@ class OrderDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
-    const Color surfaceLight = Colors.white;
-
-    const Color errorRed = Color(0xFFD32F2F);
-
-    const Color successGreen = Color(0xFF388E3C);
-
-    const Color warningAmber = Color(0xFFF57C00);
-
-    const Color infoBlue = Color(0xFF1976D2);
-
     final orderAsync = ref.watch(orderDetailProvider(orderId));
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Detalle del Pedido'),
       ),
@@ -42,22 +28,22 @@ class OrderDetailScreen extends ConsumerWidget {
           children: [
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment:                         MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Pedido #${order.id.substring(0, 8)}',
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppTheme.darkCharcoal),
                         ),
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.orange.shade50,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             order.estado,
@@ -71,12 +57,12 @@ class OrderDetailScreen extends ConsumerWidget {
                       ],
                     ),
                     const Divider(height: 24),
-                    const Text('Productos solicitados:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text('Productos solicitados:', style: TextStyle(fontWeight: FontWeight.bold, color: AppTheme.darkCharcoal)),
                     const SizedBox(height: 12),
                     ...order.detalles.map((detalle) => Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Row(
-                            mainAxisAlignment:                         MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('${detalle.cantidad}x ${detalle.productoId}'),
                               Text('\$${detalle.subtotal.toStringAsFixed(0)}'),
@@ -85,12 +71,12 @@ class OrderDetailScreen extends ConsumerWidget {
                         )),
                     const Divider(height: 24),
                     Row(
-                      mainAxisAlignment:                         MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Total Pagado', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        const Text('Total Pagado', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.darkCharcoal)),
                         Text(
                           '\$${order.total.toStringAsFixed(0)}',
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: primaryOrange),
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.darkCharcoal),
                         ),
                       ],
                     ),

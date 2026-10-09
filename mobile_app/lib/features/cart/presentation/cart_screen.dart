@@ -32,8 +32,6 @@ class _CartScreenState extends ConsumerState<CartScreen> {
 
     try {
       final pedidoService = ref.read(pedidoServiceProvider);
-      // For standard customer flow, we use a placeholder or default direction ID if not explicitly selected
-      // Backend validates address and items.
       final detalles = cartState.items.map((i) => {
             'producto_id': i.producto.id,
             'cantidad': i.cantidad,
@@ -69,15 +67,10 @@ class _CartScreenState extends ConsumerState<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
     final cartState = ref.watch(cartProvider);
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Tu Carrito'),
       ),
@@ -91,7 +84,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                   const Text('Tu carrito está vacío', style: TextStyle(fontSize: 18, color: Colors.grey)),
                   const SizedBox(height: 24),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(minimumSize: const Size(200, 48)),
+                    style: ElevatedButton.styleFrom(minimumSize: const Size(200, 50)),
                     onPressed: () => context.go('/home'),
                     child: const Text('Ver comercios'),
                   ),
@@ -103,10 +96,10 @@ class _CartScreenState extends ConsumerState<CartScreen> {
               children: [
                 if (_errorMessage != null) ...[
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: Colors.red.shade50,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(14),
                       border: Border.all(color: Colors.red.shade200),
                     ),
                     child: Text(_errorMessage!, style: TextStyle(color: Colors.red.shade800)),
@@ -116,7 +109,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                 ...cartState.items.map((item) => Card(
                       margin: const EdgeInsets.only(bottom: 12),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: Row(
                           children: [
                             Expanded(
@@ -125,7 +118,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                                 children: [
                                   Text(
                                     item.producto.nombre,
-                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.darkCharcoal),
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
@@ -164,14 +157,14 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                 const SizedBox(height: 24),
                 Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Text('Resumen de Pago', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                        const Text('Resumen de Pago', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.darkCharcoal)),
                         const Divider(height: 24),
                         Row(
-                          mainAxisAlignment:                           MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text('Subtotal'),
                             Text('\$${cartState.total.toStringAsFixed(0)}'),
@@ -179,7 +172,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                         ),
                         const SizedBox(height: 8),
                         const Row(
-                          mainAxisAlignment:                           MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Costo de envío'),
                             Text('\$4,000'),
@@ -187,12 +180,12 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                         ),
                         const Divider(height: 24),
                         Row(
-                          mainAxisAlignment:                           MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('Total estimado', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                            const Text('Total estimado', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppTheme.darkCharcoal)),
                             Text(
                               '\$${(cartState.total + 4000).toStringAsFixed(0)}',
-                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: primaryOrange),
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: AppTheme.darkCharcoal),
                             ),
                           ],
                         ),
@@ -208,8 +201,8 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                           width: 24,
                           height: 24,
                           child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            strokeWidth: 2.5,
+                            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.darkCharcoal),
                           ),
                         )
                       : const Text('Confirmar Pedido'),

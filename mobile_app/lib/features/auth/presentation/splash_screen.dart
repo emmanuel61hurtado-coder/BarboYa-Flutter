@@ -41,51 +41,57 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.primaryOrange,
+      backgroundColor: AppTheme.darkCharcoal,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(28),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.primaryLime,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 20,
+                    color: AppTheme.primaryLime.withOpacity(0.3),
+                    blurRadius: 30,
                     offset: const Offset(0, 10),
                   ),
                 ],
               ),
               child: const Icon(
-                Icons.delivery_dining,
+                Icons.bolt,
                 size: 64,
-                color: AppTheme.primaryOrange,
+                color: AppTheme.darkCharcoal,
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 32),
             const Text(
               'BarboYa',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 36,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.2,
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1.5,
               ),
             ),
-            const SizedBox(height: 8),
-            const Text(
-              'Tu plataforma de domicilios local',
+            const SizedBox(height: 12),
+            Text(
+              'Movilidad y domicilios inteligentes',
               style: TextStyle(
-                color: Colors.white70,
-                fontSize: 16,
+                color: Colors.grey.shade400,
+                fontSize: 15,
+                letterSpacing: 0.5,
               ),
             ),
-            const SizedBox(height: 48),
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            const SizedBox(height: 56),
+            const SizedBox(
+              width: 32,
+              height: 32,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryLime),
+                strokeWidth: 3,
+              ),
             ),
           ],
         ),
