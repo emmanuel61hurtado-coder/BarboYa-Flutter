@@ -17,10 +17,10 @@ class CalificacionService {
       '/calificaciones',
       data: {
         'pedido_id': pedidoId,
-        if (comercioId != null) 'comercio_id': comercioId,
-        if (repartidorId != null) 'repartidor_id': repartidorId,
+        'comercio_id': ?comercioId,
+        'repartidor_id': ?repartidorId,
         'puntuacion': puntuacion,
-        if (comentario != null) 'comentario': comentario,
+        'comentario': ?comentario,
       },
     );
     return CalificacionRead.fromJson(response.data);

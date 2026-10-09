@@ -95,7 +95,7 @@ class _CustomerHomeScreenState extends ConsumerState<CustomerHomeScreen> {
                   ),
                 ),
                 loading: () => const Text('¡Hola!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                error: (_, __) => const Text('¡Bienvenido a BarboYa!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                error: (_, _) => const Text('¡Bienvenido a BarboYa!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(height: 4),
               const Text(
@@ -258,7 +258,7 @@ class _CustomerHomeScreenState extends ConsumerState<CustomerHomeScreen> {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: categorias.length + 1,
-                      separatorBuilder: (_, __) => const SizedBox(width: 8),
+                      separatorBuilder: (_, _) => const SizedBox(width: 8),
                       itemBuilder: (context, index) {
                         if (index == 0) {
                           final isSelected = _selectedCategory == null;
@@ -286,7 +286,7 @@ class _CustomerHomeScreenState extends ConsumerState<CustomerHomeScreen> {
                   );
                 },
                 loading: () => const SizedBox.shrink(),
-                error: (_, __) => const SizedBox.shrink(),
+                error: (_, _) => const SizedBox.shrink(),
               ),
               const SizedBox(height: 20),
 

@@ -156,7 +156,7 @@ class DeliveryDashboardScreen extends ConsumerWidget {
                             style: const TextStyle(color: Colors.white70, fontSize: 12),
                           ),
                           loading: () => const Text('Cargando vehículo...', style: TextStyle(color: Colors.white70, fontSize: 12)),
-                          error: (_, __) => const Text('Acepta pedidos listos para repartir', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                          error: (_, _) => const Text('Acepta pedidos listos para repartir', style: TextStyle(color: Colors.white70, fontSize: 12)),
                         ),
                       ],
                     ),

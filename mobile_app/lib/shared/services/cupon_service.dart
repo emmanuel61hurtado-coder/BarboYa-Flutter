@@ -31,8 +31,8 @@ class CuponService {
       '/cupones',
       data: {
         'codigo': codigo.trim().toUpperCase(),
-        if (descuentoPorcentaje != null) 'descuento_porcentaje': descuentoPorcentaje,
-        if (descuentoMonto != null) 'descuento_monto': descuentoMonto,
+        'descuento_porcentaje': ?descuentoPorcentaje,
+        'descuento_monto': ?descuentoMonto,
         'monto_minimo': montoMinimo,
         'usos_maximos': usosMaximos,
         'activo': true,

@@ -24,7 +24,7 @@ class DireccionService {
       data: {
         'nombre': nombre,
         'direccion': direccion,
-        if (detalles != null) 'detalles': detalles,
+        'detalles': ?detalles,
         'lat': lat,
         'lng': lng,
       },

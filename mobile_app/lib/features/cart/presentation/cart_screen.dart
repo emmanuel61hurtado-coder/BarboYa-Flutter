@@ -352,7 +352,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                             );
                           },
                           loading: () => const LinearProgressIndicator(),
-                          error: (_, __) => TextButton(
+                          error: (_, _) => TextButton(
                             onPressed: _agregarDireccionRapida,
                             child: const Text('Crear dirección'),
                           ),
