@@ -17,25 +17,10 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
-    const Color surfaceLight = Colors.white;
-
-    const Color errorRed = Color(0xFFD32F2F);
-
-    const Color successGreen = Color(0xFF388E3C);
-
-    const Color warningAmber = Color(0xFFF57C00);
-
-    const Color infoBlue = Color(0xFF1976D2);
-
     final userAsync = ref.watch(userProfileProvider);
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Mi Perfil'),
       ),
@@ -48,13 +33,13 @@ class ProfileScreen extends ConsumerWidget {
                 children: [
                   const CircleAvatar(
                     radius: 50,
-                    backgroundColor: AppTheme.primaryOrange,
-                    child: Icon(Icons.person, size: 50, color: Colors.white),
+                    backgroundColor: AppTheme.darkCharcoal,
+                    child: Icon(Icons.person, size: 50, color: AppTheme.primaryLime),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     user.nombre,
-                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.darkCharcoal),
                   ),
                   const SizedBox(height: 4),
                   Text(

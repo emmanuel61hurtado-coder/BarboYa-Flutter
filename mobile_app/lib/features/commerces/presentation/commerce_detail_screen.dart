@@ -17,48 +17,45 @@ class CommerceDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
     final commerceAsync = ref.watch(commerceDetailProvider(commerceId));
     final cartState = ref.watch(cartProvider);
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       body: commerceAsync.when(
         data: (comercio) => CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 200,
+              expandedHeight: 220,
               pinned: true,
+              backgroundColor: AppTheme.darkCharcoal,
+              foregroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(comercio.nombre, style: const TextStyle(color: Colors.white, fontSize: 16)),
+                title: Text(comercio.nombre, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                 background: Container(
-                  color: secondaryDark,
-                  child: const Center(
-                    child: Icon(Icons.storefront, size: 80, color: primaryOrange),
+                  color: AppTheme.darkCharcoal,
+                  child: Center(
+                    child: Icon(Icons.storefront, size: 80, color: AppTheme.primaryLime.withOpacity(0.8)),
                   ),
                 ),
               ),
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       comercio.nombre,
-                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: secondaryDark),
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppTheme.darkCharcoal),
                     ),
-                    const SizedBox(height: 8),
-                    Text(comercio.descripcion ?? comercio.direccion, style: const TextStyle(color: Colors.grey)),
+                    const SizedBox(height: 6),
+                    Text(comercio.descripcion ?? comercio.direccion, style: const TextStyle(color: Colors.grey, fontSize: 14)),
                     const SizedBox(height: 24),
                     const Text(
                       'Menú de Productos',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: secondaryDark),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.darkCharcoal),
                     ),
                   ],
                 ),
@@ -80,7 +77,7 @@ class CommerceDetailScreen extends ConsumerWidget {
                               children: [
                                 Text(
                                   producto.nombre,
-                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.darkCharcoal),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
@@ -95,7 +92,7 @@ class CommerceDetailScreen extends ConsumerWidget {
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
-                                    color: primaryOrange,
+                                    color: AppTheme.darkCharcoal,
                                   ),
                                 ),
                               ],
@@ -104,7 +101,7 @@ class CommerceDetailScreen extends ConsumerWidget {
                           const SizedBox(width: 16),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              minimumSize: const Size(80, 40),
+                              minimumSize: const Size(80, 42),
                               padding: const EdgeInsets.symmetric(horizontal: 12),
                             ),
                             onPressed: producto.disponible

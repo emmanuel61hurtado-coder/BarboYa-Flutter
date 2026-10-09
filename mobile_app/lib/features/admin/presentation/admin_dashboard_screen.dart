@@ -9,13 +9,8 @@ class AdminDashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Panel de Administración'),
         actions: [
@@ -34,12 +29,12 @@ class AdminDashboardScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: secondaryDark,
-              borderRadius: BorderRadius.circular(16),
+              color: AppTheme.darkCharcoal,
+              borderRadius: BorderRadius.circular(20),
             ),
             child: const Row(
               children: [
-                Icon(Icons.admin_panel_settings, color: primaryOrange, size: 40),
+                Icon(Icons.admin_panel_settings, color: AppTheme.primaryLime, size: 40),
                 SizedBox(width: 16),
                 Expanded(
                   child: Column(
@@ -89,11 +84,11 @@ class AdminDashboardScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 40, color: AppTheme.primaryOrange),
+              Icon(icon, size: 40, color: AppTheme.darkCharcoal),
               const SizedBox(height: 12),
               Text(
                 title,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.darkCharcoal),
               ),
             ],
           ),

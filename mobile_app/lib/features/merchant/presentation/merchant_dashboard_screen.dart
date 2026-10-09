@@ -17,15 +17,10 @@ class MerchantDashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
     final ordersAsync = ref.watch(merchantOrdersProvider);
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Panel de Comercio'),
         actions: [
@@ -39,19 +34,23 @@ class MerchantDashboardScreen extends ConsumerWidget {
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: () async => ref.refresh(merchantOrdersProvider),
+        color: AppTheme.darkCharcoal,
+        backgroundColor: AppTheme.primaryLime,
+        onRefresh: () async {
+          ref.refresh(merchantOrdersProvider);
+        },
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: secondaryDark,
-                borderRadius: BorderRadius.circular(16),
+                color: AppTheme.darkCharcoal,
+                borderRadius: BorderRadius.circular(20),
               ),
               child: const Row(
                 children: [
-                  Icon(Icons.store, color: primaryOrange, size: 40),
+                  Icon(Icons.storefront, color: AppTheme.primaryLime, size: 40),
                   SizedBox(width: 16),
                   Expanded(
                     child: Column(
@@ -75,7 +74,7 @@ class MerchantDashboardScreen extends ConsumerWidget {
             const SizedBox(height: 24),
             const Text(
               'Pedidos Entrantes',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: secondaryDark),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.darkCharcoal),
             ),
             const SizedBox(height: 16),
             ordersAsync.when(
@@ -102,10 +101,10 @@ class MerchantDashboardScreen extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment:                               MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('Pedido #${order.id.substring(0, 8)}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                                Text(order.estado, style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.primaryOrange)),
+                                Text(order.estado, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
                               ],
                             ),
                             const Divider(height: 16),
@@ -124,7 +123,7 @@ class MerchantDashboardScreen extends ConsumerWidget {
                                 ),
                                 const SizedBox(width: 8),
                                 ElevatedButton(
-                                  style: ElevatedButton.styleFrom(minimumSize: const Size(100, 36)),
+                                  style: ElevatedButton.styleFrom(minimumSize: const Size(100, 38)),
                                   onPressed: () async {
                                     final service = PedidoService(DioClient());
                                     await service.actualizarEstadoPedido(order.id, 'LISTO');

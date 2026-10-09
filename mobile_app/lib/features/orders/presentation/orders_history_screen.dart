@@ -14,29 +14,16 @@ class OrdersHistoryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color secondaryDark = Color(0xFF1E1E24);
-    const Color backgroundLight = Color(0xFFF8F9FA);
-
-    const Color primaryOrange = Color(0xFFFF6B00);
-
-    const Color surfaceLight = Colors.white;
-
-    const Color errorRed = Color(0xFFD32F2F);
-
-    const Color successGreen = Color(0xFF388E3C);
-
-    const Color warningAmber = Color(0xFFF57C00);
-
-    const Color infoBlue = Color(0xFF1976D2);
-
     final ordersAsync = ref.watch(ordersProvider);
 
     return Scaffold(
-      backgroundColor: backgroundLight,
+      backgroundColor: AppTheme.backgroundLight,
       appBar: AppBar(
         title: const Text('Mis Pedidos'),
       ),
       body: RefreshIndicator(
+        color: AppTheme.darkCharcoal,
+        backgroundColor: AppTheme.primaryLime,
         onRefresh: () async => ref.refresh(ordersProvider),
         child: ordersAsync.when(
           data: (orders) {
@@ -56,7 +43,7 @@ class OrdersHistoryScreen extends ConsumerWidget {
                     contentPadding: const EdgeInsets.all(16),
                     title: Text(
                       'Pedido #${order.id.substring(0, 8)}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold, color: AppTheme.darkCharcoal),
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +60,7 @@ class OrdersHistoryScreen extends ConsumerWidget {
                         color: order.estado == 'ENTREGADO'
                             ? Colors.green.shade50
                             : Colors.orange.shade50,
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
                         order.estado,
