@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile_app/core/theme/app_theme.dart';
-import 'package:mobile_app/features/auth/presentation/login_screen.dart';
+import 'package:mobile_app/core/widgets/app_widgets.dart';
+import 'package:mobile_app/shared/providers/app_providers.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -51,7 +52,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('¡Registro exitoso! Por favor inicia sesión.')),
+        const SnackBar(
+          content: Text('¡Registro exitoso! Por favor inicia sesión.'),
+          backgroundColor: AppTheme.successGreen,
+        ),
       );
       context.pop();
     } catch (e) {
@@ -86,11 +90,14 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: Colors.red.shade50,
+                      color: AppTheme.errorRed.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.red.shade200),
+                      border: Border.all(color: AppTheme.errorRed.withValues(alpha: 0.3)),
                     ),
-                    child: Text(_errorMessage!, style: TextStyle(color: Colors.red.shade800)),
+                    child: Text(
+                      _errorMessage!,
+                      style: const TextStyle(color: AppTheme.errorRed, fontWeight: FontWeight.w600),
+                    ),
                   ),
                   const SizedBox(height: 20),
                 ],
@@ -138,15 +145,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 ),
                 const SizedBox(height: 16),
                 DropdownButtonFormField<String>(
-                  value: _selectedRole,
+                  initialValue: _selectedRole,
                   decoration: const InputDecoration(
                     labelText: 'Tipo de cuenta',
                     prefixIcon: Icon(Icons.badge_outlined, color: AppTheme.darkCharcoal),
                   ),
                   items: const [
-                    DropdownMenuItem(value: 'CLIENTE', child: Text('Cliente')),
-                    DropdownMenuItem(value: 'COMERCIO', child: Text('Comercio')),
-                    DropdownMenuItem(value: 'REPARTIDOR', child: Text('Repartidor')),
+                    DropdownMenuItem(value: 'CLIENTE', child: Text('Cliente (Movilidad y Comida)')),
+                    DropdownMenuItem(value: 'COMERCIO', child: Text('Comercio o Restaurante')),
+                    DropdownMenuItem(value: 'REPARTIDOR', child: Text('Conductor o Repartidor')),
                   ],
                   onChanged: (value) {
                     if (value != null) {
@@ -157,18 +164,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 28),
-                ElevatedButton(
-                  onPressed: _isLoading ? null : _register,
-                  child: _isLoading
-                      ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2.5,
-                            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.darkCharcoal),
-                          ),
-                        )
-                      : const Text('Registrarse'),
+                CustomButton(
+                  text: 'Registrarse',
+                  isLoading: _isLoading,
+                  onPressed: _register,
                 ),
               ],
             ),
