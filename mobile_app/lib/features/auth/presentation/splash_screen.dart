@@ -18,14 +18,14 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkSession() async {
-    await Future.delayed(const Duration(milliseconds: 1200));
+    await Future.delayed(const Duration(seconds: 1));
     final token = await SecureStorage.getAccessToken();
-    final role = await SecureStorage.getUserRole();
     if (!mounted) return;
 
     if (token == null || token.isEmpty) {
       context.go('/login');
     } else {
+      final role = await SecureStorage.getUserRole();
       if (role == 'COMERCIO') {
         context.go('/merchant');
       } else if (role == 'REPARTIDOR') {
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.primaryLime.withValues(alpha: 0.3),
+                    color: AppTheme.primaryLime.withOpacity(0.3),
                     blurRadius: 30,
                     offset: const Offset(0, 10),
                   ),

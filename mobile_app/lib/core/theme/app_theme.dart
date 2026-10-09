@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // BarboYa Design System: Electric Lime & Sophisticated Dark Charcoal
+  // BarboYa New Art Direction: Electric Lime & Sophisticated Dark Charcoal
   static const Color primaryLime = Color(0xFFC6F600);
   static const Color primaryLimeDark = Color(0xFFA3D000);
   static const Color darkCharcoal = Color(0xFF151914);
@@ -10,41 +10,6 @@ class AppTheme {
   static const Color surfaceLight = Colors.white;
   static const Color errorRed = Color(0xFFE53935);
   static const Color successGreen = Color(0xFF2E7D32);
-  static const Color accentBlue = Color(0xFF1E88E5);
-  static const Color accentOrange = Color(0xFFFB8C00);
-  static const Color textMuted = Color(0xFF6B7280);
-
-  // Status Color Helper
-  static Color getStatusColor(String status) {
-    switch (status.toUpperCase()) {
-      case 'CREADO':
-      case 'SOLICITADO':
-      case 'PENDIENTE':
-        return accentOrange;
-      case 'ACEPTADO':
-      case 'OFERTADO':
-        return accentBlue;
-      case 'PREPARANDO':
-      case 'ASIGNADA':
-        return const Color(0xFF8E24AA);
-      case 'LISTO':
-      case 'EN_CURSO':
-      case 'EN_CAMINO':
-      case 'RECOGIDO':
-        return const Color(0xFF00897B);
-      case 'ENTREGADO':
-      case 'ENTREGADA':
-      case 'FINALIZADO':
-      case 'ACTIVO':
-        return successGreen;
-      case 'CANCELADO':
-      case 'CANCELADA':
-      case 'BLOQUEADO':
-        return errorRed;
-      default:
-        return textMuted;
-    }
-  }
 
   static ThemeData get lightTheme {
     return ThemeData(
@@ -74,7 +39,7 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: surfaceLight,
         elevation: 1,
-        shadowColor: Colors.black.withValues(alpha: 0.08),
+        shadowColor: Colors.black.withOpacity(0.08),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),

@@ -1,21 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile_app/core/security/secure_storage.dart';
 
-import 'package:mobile_app/features/admin/presentation/admin_dashboard_screen.dart';
+// Placeholder screens for routing setup
 import 'package:mobile_app/features/auth/presentation/login_screen.dart';
 import 'package:mobile_app/features/auth/presentation/register_screen.dart';
 import 'package:mobile_app/features/auth/presentation/splash_screen.dart';
-import 'package:mobile_app/features/cart/presentation/cart_screen.dart';
-import 'package:mobile_app/features/commerces/presentation/commerce_detail_screen.dart';
-import 'package:mobile_app/features/delivery/presentation/delivery_dashboard_screen.dart';
 import 'package:mobile_app/features/home/presentation/customer_home_screen.dart';
-import 'package:mobile_app/features/merchant/presentation/merchant_dashboard_screen.dart';
-import 'package:mobile_app/features/notifications/presentation/notifications_screen.dart';
+import 'package:mobile_app/features/commerces/presentation/commerce_detail_screen.dart';
+import 'package:mobile_app/features/cart/presentation/cart_screen.dart';
 import 'package:mobile_app/features/orders/presentation/order_detail_screen.dart';
 import 'package:mobile_app/features/orders/presentation/orders_history_screen.dart';
+import 'package:mobile_app/features/delivery/presentation/delivery_dashboard_screen.dart';
+import 'package:mobile_app/features/merchant/presentation/merchant_dashboard_screen.dart';
+import 'package:mobile_app/features/admin/presentation/admin_dashboard_screen.dart';
 import 'package:mobile_app/features/profile/presentation/profile_screen.dart';
-import 'package:mobile_app/features/rides/presentation/rides_screen.dart';
-import 'package:mobile_app/features/shipments/presentation/shipments_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -58,18 +58,6 @@ final routerProvider = Provider<GoRouter>((ref) {
           final id = state.pathParameters['id']!;
           return OrderDetailScreen(orderId: id);
         },
-      ),
-      GoRoute(
-        path: '/rides',
-        builder: (context, state) => const RidesScreen(),
-      ),
-      GoRoute(
-        path: '/shipments',
-        builder: (context, state) => const ShipmentsScreen(),
-      ),
-      GoRoute(
-        path: '/notifications',
-        builder: (context, state) => const NotificationsScreen(),
       ),
       GoRoute(
         path: '/delivery',
