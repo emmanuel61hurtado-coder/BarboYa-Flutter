@@ -58,7 +58,7 @@ class ProfileScreen extends ConsumerWidget {
                     ListTile(
                       leading: const Icon(Icons.phone),
                       title: const Text('Teléfono'),
-                      subtitle: Text(user.telefono ?? 'No registrado'),
+                      subtitle: Text(user.telefono.isNotEmpty ? user.telefono : 'No registrado'),
                     ),
                     const Divider(),
                     ListTile(

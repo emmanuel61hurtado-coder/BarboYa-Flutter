@@ -34,7 +34,7 @@ class _RidesScreenState extends ConsumerState<RidesScreen> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, dynamic: false, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override

@@ -89,6 +89,7 @@ class _OrderDetailScreenState extends ConsumerState<OrderDetailScreen> {
             ElevatedButton(
               onPressed: () async {
                 Navigator.pop(ctx);
+                final messenger = ScaffoldMessenger.of(context);
                 try {
                   await ref.read(calificacionServiceProvider).calificar(
                         pedidoId: order.id,
@@ -98,7 +99,7 @@ class _OrderDetailScreenState extends ConsumerState<OrderDetailScreen> {
                         comentario: comentarioCtrl.text.trim().isNotEmpty ? comentarioCtrl.text.trim() : null,
                       );
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    messenger.showSnackBar(
                       const SnackBar(
                         content: Text('¡Gracias por tu calificación!'),
                         backgroundColor: AppTheme.successGreen,
@@ -107,7 +108,7 @@ class _OrderDetailScreenState extends ConsumerState<OrderDetailScreen> {
                   }
                 } catch (e) {
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    messenger.showSnackBar(
                       SnackBar(content: Text('Error al calificar: $e')),
                     );
                   }

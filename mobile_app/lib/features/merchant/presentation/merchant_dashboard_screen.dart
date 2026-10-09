@@ -37,7 +37,7 @@ class MerchantDashboardScreen extends ConsumerWidget {
         color: AppTheme.darkCharcoal,
         backgroundColor: AppTheme.primaryLime,
         onRefresh: () async {
-          ref.refresh(merchantOrdersProvider);
+          ref.invalidate(merchantOrdersProvider);
         },
         child: ListView(
           padding: const EdgeInsets.all(16),
@@ -117,7 +117,7 @@ class MerchantDashboardScreen extends ConsumerWidget {
                                   onPressed: () async {
                                     final service = PedidoService(DioClient());
                                     await service.actualizarEstadoPedido(order.id, 'PREPARANDO');
-                                    ref.refresh(merchantOrdersProvider);
+                                    ref.invalidate(merchantOrdersProvider);
                                   },
                                   child: const Text('Preparar'),
                                 ),
@@ -127,7 +127,7 @@ class MerchantDashboardScreen extends ConsumerWidget {
                                   onPressed: () async {
                                     final service = PedidoService(DioClient());
                                     await service.actualizarEstadoPedido(order.id, 'LISTO');
-                                    ref.refresh(merchantOrdersProvider);
+                                    ref.invalidate(merchantOrdersProvider);
                                   },
                                   child: const Text('Listo'),
                                 ),
